@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+ #include <sched.h>
+
 
 #define COUNT 1000
 #define LOOP 10000
@@ -16,6 +18,7 @@ void *func(void *arg){
 	for (i=0; i<COUNT; i++) {
 		busy();
 		clock_gettime(CLOCK_REALTIME, &ts[thn][i]);
+		sched_yield();
 	}
 
 }
